@@ -10,23 +10,28 @@ import (
 )
 
 func InitializeDatabase() (*gorm.DB, error) {
-	// Load environment variables
+	// Carregar variáveis de ambiente do arquivo .env
 	err := godotenv.Load()
 	if err != nil {
-		fmt.Printf("error loading .env file: %v", err)
+		fmt.Printf("error loading .env file: %v\n", err)
 		return nil, err
 	}
 
-	// String to connect to database
+	// Obter a string de conexão do banco de dados (DSN)
 	dsn := os.Getenv("DSN")
+	if dsn == "" {
+		err := fmt.Errorf("DSN environment variable is not set")
+		fmt.Println(err)
+		return nil, err
+	}
 
-	// Connect to database
+	// Conectar ao banco de dados
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Printf("error connecting to database: %v", err)
+		fmt.Printf("error connecting to database: %v\n", err)
 		return nil, err
 	}
 
-	// Return database
-	return database, err
+	// Retornar a conexão com o banco de dados
+	return database, nil
 }
