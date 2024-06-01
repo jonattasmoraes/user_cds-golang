@@ -19,6 +19,8 @@ func UpdateUserByIdHandler(ctx *gin.Context) {
 		return
 	}
 
+	utils.ToLowerCaseExcept(&request, "password")
+
 	id := ctx.Param("id")
 
 	if id == "" {
