@@ -13,6 +13,9 @@ func InitializeRouter() {
 	// Instantiate server
 	server := gin.Default()
 
+	// Initialize routes
+	initializeRoutes(server)
+
 	// Get server port
 	port := getServerPort()
 
