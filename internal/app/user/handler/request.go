@@ -50,3 +50,42 @@ func (r *createUserRequest) Validate() error {
 
 	return nil
 }
+
+type updateUserRequest struct {
+	Name     string `json:"name"`
+	LastName string `json:"lastname"`
+	Email    string `json:"email"`
+	Role     string `json:"role"`
+}
+
+func (r *updateUserRequest) Validate() error {
+	if r.Name == "" && r.LastName == "" && r.Email == "" && r.Role == "" {
+		return fmt.Errorf("request body is empty or invalid, please try again")
+	}
+
+	if r.Name == "" {
+		return utils.ParamIsRequired("name", "string")
+	}
+
+	if r.LastName == "" {
+		return utils.ParamIsRequired("lastname", "string")
+	}
+
+	if r.Role != "admin" && r.Role != "user" && r.Role != "supervisor" {
+		return fmt.Errorf("param: role must be 'admin', 'supervisor' or 'user'")
+	}
+
+	if r.Email == "" {
+		return utils.ParamIsRequired("email", "string")
+	}
+
+	if db.Where("email = ?", r.Email).First(&models.User{}).Error == nil {
+		return fmt.Errorf("a user with email '%s' already exists", r.Email)
+	}
+
+	if !utils.IsValidEmail(r.Email) {
+		return fmt.Errorf("invalid email, please enter a valid email and try again")
+	}
+
+	return nil
+}
