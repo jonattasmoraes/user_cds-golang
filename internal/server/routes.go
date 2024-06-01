@@ -17,5 +17,6 @@ func initializeRoutes(router *gin.Engine) {
 		v1.DELETE("/users/:id", handler.DeleteUserByIdHandler)
 		v1.GET("/users/:id", handler.GetUserByIdHandler)
 		v1.PUT("/users/:id", handler.UpdateUserByIdHandler)
+		v1.PATCH("/users/:id", handler.PatchUserHandler)
 	}
 }

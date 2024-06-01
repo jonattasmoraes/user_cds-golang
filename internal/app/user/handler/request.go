@@ -15,6 +15,20 @@ type createUserRequest struct {
 	Role     string `json:"role"`
 }
 
+type updateUserRequest struct {
+	Name     string `json:"name"`
+	LastName string `json:"lastname"`
+	Email    string `json:"email"`
+	Role     string `json:"role"`
+}
+
+type patchUserRequest struct {
+	Name     string `json:"name"`
+	LastName string `json:"lastname"`
+	Email    string `json:"email"`
+	Role     string `json:"role"`
+}
+
 func (r *createUserRequest) Validate() error {
 	if r.Name == "" && r.LastName == "" && r.Email == "" && r.Password == "" && r.Role == "" {
 		return fmt.Errorf("request body is empty or invalid, please try again")
@@ -51,13 +65,6 @@ func (r *createUserRequest) Validate() error {
 	return nil
 }
 
-type updateUserRequest struct {
-	Name     string `json:"name"`
-	LastName string `json:"lastname"`
-	Email    string `json:"email"`
-	Role     string `json:"role"`
-}
-
 func (r *updateUserRequest) Validate() error {
 	if r.Name == "" && r.LastName == "" && r.Email == "" && r.Role == "" {
 		return fmt.Errorf("request body is empty or invalid, please try again")
@@ -85,6 +92,29 @@ func (r *updateUserRequest) Validate() error {
 
 	if !utils.IsValidEmail(r.Email) {
 		return fmt.Errorf("invalid email, please enter a valid email and try again")
+	}
+
+	return nil
+}
+
+func (r *patchUserRequest) Validate() error {
+	if r.Name == "" && r.LastName == "" && r.Email == "" && r.Role == "" {
+		return fmt.Errorf("at least one field must be provided")
+	}
+
+	if r.Role != "" && r.Role != "admin" && r.Role != "user" && r.Role != "supervisor" {
+		return fmt.Errorf("param: role must be 'admin', 'supervisor' or 'user'")
+	}
+
+	if r.Email != "" {
+		if !utils.IsValidEmail(r.Email) {
+			return fmt.Errorf("invalid email, please enter a valid email and try again")
+		}
+
+		var existingUser models.User
+		if db.Where("email = ?", r.Email).First(&existingUser).Error == nil {
+			return fmt.Errorf("a user with email '%s' already exists", r.Email)
+		}
 	}
 
 	return nil
