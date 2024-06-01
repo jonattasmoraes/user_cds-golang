@@ -17,5 +17,7 @@ func GetAllUsersHandler(ctx *gin.Context) {
 		return
 	}
 
-	utils.SendSuccess(ctx, "list of users", users)
+	response := GetAllUsersResponse(users)
+
+	utils.SendSuccess(ctx, "list of users", response)
 }

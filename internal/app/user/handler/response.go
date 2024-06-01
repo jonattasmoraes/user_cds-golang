@@ -24,6 +24,14 @@ func CreateUserResponse(user models.User) createUserResponse {
 	}
 }
 
+func GetAllUsersResponse(users []models.User) []createUserResponse {
+	var response []createUserResponse
+	for _, user := range users {
+		response = append(response, CreateUserResponse(user))
+	}
+	return response
+}
+
 func DeleteUserResponse(user models.User) createUserResponse {
 	return createUserResponse{
 		ID:        user.ID,
