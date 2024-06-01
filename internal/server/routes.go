@@ -15,5 +15,6 @@ func initializeRoutes(router *gin.Engine) {
 		v1.POST("/users", handler.CreateUserHandler)
 		v1.GET("/users", handler.GetAllUsersHandler)
 		v1.DELETE("/users/:id", handler.DeleteUserByIdHandler)
+		v1.GET("/users/:id", handler.GetUserByIdHandler)
 	}
 }
