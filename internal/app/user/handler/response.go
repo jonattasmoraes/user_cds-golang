@@ -2,38 +2,28 @@ package handler
 
 import "github.com/jonattasmoraes/app-go/internal/app/user/models"
 
-type createUserResponse struct {
-	ID        uint   `json:"id"`
-	Name      string `json:"name"`
-	LastName  string `json:"lastname"`
-	Email     string `json:"email"`
-	Role      string `json:"role"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
-}
-
-func CreateUserResponse(user models.User) createUserResponse {
-	return createUserResponse{
+func CreateUserResponse(user models.User) models.CreateUserResponse {
+	return models.CreateUserResponse{
 		ID:        user.ID,
 		Name:      user.Name,
 		LastName:  user.LastName,
 		Email:     user.Email,
 		Role:      user.Role,
-		CreatedAt: user.CreatedAt.Format("2006-01-02 15:04:05"),
-		UpdatedAt: user.UpdatedAt.Format("2006-01-02 15:04:05"),
+		CreatedAt: user.CreatedAt.String(),
+		UpdatedAt: user.UpdatedAt.String(),
 	}
 }
 
-func GetAllUsersResponse(users []models.User) []createUserResponse {
-	var response []createUserResponse
+func GetAllUsersResponse(users []models.User) []models.CreateUserResponse {
+	var response []models.CreateUserResponse
 	for _, user := range users {
 		response = append(response, CreateUserResponse(user))
 	}
 	return response
 }
 
-func DeleteUserResponse(user models.User) createUserResponse {
-	return createUserResponse{
+func DeleteUserResponse(user models.User) models.CreateUserResponse {
+	return models.CreateUserResponse{
 		ID:        user.ID,
 		Name:      user.Name,
 		LastName:  user.LastName,
@@ -42,4 +32,19 @@ func DeleteUserResponse(user models.User) createUserResponse {
 		CreatedAt: user.CreatedAt.Format("2006-01-02 15:04:05"),
 		UpdatedAt: user.UpdatedAt.Format("2006-01-02 15:04:05"),
 	}
+}
+
+type ErrorResponse struct {
+	Message   string `json:"message"`
+	ErrorCode string `json:"errorCode"`
+}
+
+type UserResponse struct {
+	Message string                    `json:"message"`
+	Data    models.CreateUserResponse `json:"data"`
+}
+
+type GetUsersResponse struct {
+	Message string                      `json:"message"`
+	Data    []models.CreateUserResponse `json:"data"`
 }

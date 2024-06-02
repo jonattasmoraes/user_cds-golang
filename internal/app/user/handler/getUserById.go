@@ -8,6 +8,18 @@ import (
 	"github.com/jonattasmoraes/app-go/internal/utils"
 )
 
+// @BasePath /api
+
+// @Summary Get User by ID
+// @Description Get a user by ID
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param id path string true "User ID"
+// @Success 201 {object} UserResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /users/{id} [get]
 func GetUserByIdHandler(ctx *gin.Context) {
 	id := ctx.Param("id")
 
@@ -22,7 +34,7 @@ func GetUserByIdHandler(ctx *gin.Context) {
 	// Find user
 	if err := db.First(&user, id).Error; err != nil {
 		logger.Errorf("error getting user: %v", err.Error())
-		utils.SendError(ctx, http.StatusInternalServerError, "error getting user")
+		utils.SendError(ctx, http.StatusNotFound, "error getting user")
 		return
 	}
 

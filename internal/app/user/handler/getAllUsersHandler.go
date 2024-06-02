@@ -8,6 +8,16 @@ import (
 	"github.com/jonattasmoraes/app-go/internal/utils"
 )
 
+// @BasePath /api
+
+// @Summary Get All Users
+// @Description List all users
+// @Tags user
+// @Accept json
+// @Produce json
+// @Success 201 {object} GetUsersResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /users/ [get]
 func GetAllUsersHandler(ctx *gin.Context) {
 	users := []models.User{}
 

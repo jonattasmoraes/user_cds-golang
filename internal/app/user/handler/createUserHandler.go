@@ -8,6 +8,18 @@ import (
 	"github.com/jonattasmoraes/app-go/internal/utils"
 )
 
+// @BasePath /api
+
+// @Summary Create User
+// @Description Create a new user
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param user body createUserRequest true "User"
+// @Success 201 {object} UserResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /users [post]
 func CreateUserHandler(ctx *gin.Context) {
 	request := createUserRequest{}
 

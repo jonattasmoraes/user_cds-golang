@@ -8,6 +8,18 @@ import (
 	"github.com/jonattasmoraes/app-go/internal/utils"
 )
 
+// @BasePath /api
+
+// @Summary Delete User
+// @Description Delete a user
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param id path string true "User ID"
+// @Success 201 {object} UserResponse
+// @Failure 404 {object} handler.ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /users/{id} [delete]
 func DeleteUserByIdHandler(ctx *gin.Context) {
 	id := ctx.Param("id")
 
@@ -21,7 +33,7 @@ func DeleteUserByIdHandler(ctx *gin.Context) {
 	// Find user
 	if err := db.First(&user, id).First(&user).Error; err != nil {
 		logger.Errorf("error getting user: %v", err.Error())
-		utils.SendError(ctx, http.StatusInternalServerError, "error getting user")
+		utils.SendError(ctx, http.StatusNotFound, "error getting user")
 		return
 	}
 

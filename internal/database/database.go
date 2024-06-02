@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/jonattasmoraes/app-go/internal/app/user/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -30,12 +29,6 @@ func InitializeDatabase() (*gorm.DB, error) {
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Printf("error connecting to database: %v\n", err)
-		return nil, err
-	}
-
-	err = database.AutoMigrate(models.User{})
-	if err != nil {
-		fmt.Printf("error migrating database: %v\n", err)
 		return nil, err
 	}
 
