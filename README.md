@@ -18,9 +18,9 @@ Este é um projeto simples em Go utilizado para praticar a criação de uma API.
 ## Executando o Projeto
 
 1. Certifique-se de que o Docker está em execução na sua máquina.
-   ex:
+
    ```brew
-   brew install --cask docker
+   docker compose up
    ```
 
 3. Clone o repositório:
@@ -94,12 +94,12 @@ This is a simple Go project used to practice creating an API. The API allows you
 - Update user
 - Perform patch on a user
   
-##Requirements
+## Requirements
 
 - [Docker](https://www.docker.com/get-started) Docker installed on the machine
 - [Make](https://www.gnu.org/software/make/) Make installed on the machine
   
-##Running the Project
+## Running the Project
 
 1. Ensure Docker is running on your machine.
    Example:
@@ -121,7 +121,7 @@ This is a simple Go project used to practice creating an API. The API allows you
 
 ## Configuration
 
-You can change the ports used by the application by editing the .env file or directly in the docker-compose.yml file.
+You can change the ports used by the application by editing the `.env` file or directly in the `docker-compose.yml` file.
 
 Example .env
 
@@ -147,15 +147,15 @@ Example .env
    ```
 
 ## API Documentation
-The API has Swagger documentation accessible at http://localhost:{PORT}/swagger/index.html, where {PORT} is the port configured in the .env or docker-compose.yml file.
+The API has Swagger documentation accessible at http://localhost:{PORT}/swagger/index.html, where `{PORT}` is the port configured in the .env or docker-compose.yml file.
 
 ## API Endpoints
 
-POST /users: Register a new user
-GET /users: List all users
-GET /users/{id}: Get user by ID
-PUT /users/{id}: Update an existing user
-PATCH /users/{id}: Perform a patch on an existing user
+- **POST /users:** Register a new user
+- **GET /users:** List all users
+- **GET /users/{id}:** Get user by ID
+- **PUT /users/{id}:** Update an existing user
+- **PATCH /users/{id}:** Perform a patch on an existing user
 
 ## Contribution
 Feel free to open issues and pull requests.
