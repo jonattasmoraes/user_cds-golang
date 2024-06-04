@@ -102,9 +102,9 @@ This is a simple Go project used to practice creating an API. The API allows you
 ## Running the Project
 
 1. Ensure Docker is running on your machine.
-   Example:
+
    ```brew
-   brew install --cask docker
+   docker compose up
    ```
 2. Clone the repository:
    
@@ -147,7 +147,7 @@ Example .env
    ```
 
 ## API Documentation
-The API has Swagger documentation accessible at http://localhost:{PORT}/swagger/index.html, where `{PORT}` is the port configured in the .env or docker-compose.yml file.
+The API has Swagger documentation accessible at http://localhost:{PORT}/swagger/index.html, where `{PORT}` is the port configured in the `.env` or `docker-compose.yml` file.
 
 ## API Endpoints
 
