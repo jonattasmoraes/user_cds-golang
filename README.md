@@ -23,11 +23,14 @@ Este é um projeto simples em Go utilizado para praticar a criação de uma API.
    ```sh
    git clone https://github.com/seu-usuario/seu-repositorio.git
    cd seu-repositorio
+   ```
+   
 3. Execute o comando make para rodar o projeto:
 
    ```sh
    make run
-
+   ```
+   
    ## Executando o Projeto
 
    ##Configuração
@@ -43,20 +46,22 @@ Você pode alterar as portas utilizadas pela aplicação editando o arquivo `.en
   ```env
   PORT=8080
   DSN="host=postgres port=5432 user=postgres dbname=postgres password=password sslmode=disable"
+  ```
 
 ### Exemplo de `docker-compose.yml`
 
-```yaml
-version: '3'
-services:
-  app:
-    build: .
-    ports:
-      - "${PORT}:8080"
-  db:
-    image: postgres:latest
-    ports:
-      - "${DB_PORT}:5432"
+   ```yaml
+   version: '3'
+   services:
+     app:
+       build: .
+       ports:
+         - "${PORT}:8080"
+     db:
+       image: postgres:latest
+       ports:
+         - "${DB_PORT}:5432"
+   ```
 
 ## Documentação da API
 
@@ -73,11 +78,3 @@ A API possui documentação Swagger acessível em [http://localhost:{PORT}/swagg
 ## Contribuição
 
 Sinta-se à vontade para abrir issues e pull requests.
-
-
-
-
-
-
-
-   
